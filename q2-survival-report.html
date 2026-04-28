@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Q2 Survival Analysis Report</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 960px;
+      margin: 36px auto;
+      padding: 0 16px;
+      line-height: 1.72;
+      color: #111827;
+      background: #f9fafb;
+    }
+    article {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 28px;
+    }
+    h1, h2, h3 { color: #0f172a; }
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+    .meta { color: #6b7280; font-size: 14px; }
+    .back { margin-top: 18px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>Q2 Survival Analysis Report</h1>
+    <p class="meta">Project 1 | PySpark AFT Survival Regression</p>
+
+    <h2>1. Task Objective</h2>
+    <p>
+      This task aims to model time-to-event outcomes using survival analysis and
+      reproduce the workflow in a single notebook with clear comments.
+    </p>
+
+    <h2>2. Method</h2>
+    <p>
+      We use <code>AFTSurvivalRegression</code> in PySpark. The pipeline includes:
+      data preparation, feature vector construction, train/test split, model
+      fitting, and prediction with quantiles.
+    </p>
+
+    <h2>3. Data and Features</h2>
+    <ul>
+      <li><code>time_months</code>: observed duration until event or censoring</li>
+      <li><code>event</code>: 1 means event happened, 0 means censored</li>
+      <li>
+        Feature examples: <code>usage_intensity</code>,
+        <code>price_sensitivity</code>
+      </li>
+    </ul>
+
+    <h2>4. Key Results</h2>
+    <ul>
+      <li>Coefficients: [-4.598446, -6.360452]</li>
+      <li>Intercept: 9.054665</li>
+      <li>Scale: 0.090641</li>
+    </ul>
+    <p>
+      Test-set predictions and quantiles were generated successfully, confirming
+      the pipeline is executable and reproducible.
+    </p>
+
+    <h2>5. Interpretation</h2>
+    <p>
+      In this sample setting, higher usage intensity and higher price sensitivity
+      are associated with shorter predicted survival time under the fitted AFT
+      model. These are model-based associations and should not be interpreted as
+      strict causality.
+    </p>
+
+    <h2>6. Limitations</h2>
+    <p>
+      The current sample size is small and mainly for reproducibility. For a
+      production-grade analysis, larger real datasets and additional model
+      comparisons (e.g., Kaplan-Meier, Cox) are recommended.
+    </p>
+
+    <a class="back" href="./index.html">← Back to homepage</a>
+  </article>
+</body>
+</html>
