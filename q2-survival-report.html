@@ -38,26 +38,25 @@
 
     <h2>1. Task Objective</h2>
     <p>
-      This task aims to model time-to-event outcomes using survival analysis and
-      reproduce the workflow in a single notebook with clear comments.
+      The goal is to model time-to-event outcomes and reproduce the survival analysis workflow
+      in one notebook with clear comments.
     </p>
 
-    <h2>2. Method</h2>
+    <h2>2. Data and Problem Setup</h2>
     <p>
-      We use <code>AFTSurvivalRegression</code> in PySpark. The pipeline includes:
-      data preparation, feature vector construction, train/test split, model
-      fitting, and prediction with quantiles.
+      I used a reproducible sample dataset with these fields:
+      <code>time_months</code> (observed duration),
+      <code>event</code> (1=event happened, 0=censored),
+      and two numeric features
+      <code>usage_intensity</code>, <code>price_sensitivity</code>.
     </p>
 
-    <h2>3. Data and Features</h2>
-    <ul>
-      <li><code>time_months</code>: observed duration until event or censoring</li>
-      <li><code>event</code>: 1 means event happened, 0 means censored</li>
-      <li>
-        Feature examples: <code>usage_intensity</code>,
-        <code>price_sensitivity</code>
-      </li>
-    </ul>
+    <h2>3. Method</h2>
+    <p>
+      I applied <code>AFTSurvivalRegression</code> in PySpark. The pipeline is:
+      data preparation → feature vector construction → train/test split →
+      model fitting → prediction and quantile output.
+    </p>
 
     <h2>4. Key Results</h2>
     <ul>
@@ -66,23 +65,28 @@
       <li>Scale: 0.090641</li>
     </ul>
     <p>
-      Test-set predictions and quantiles were generated successfully, confirming
-      the pipeline is executable and reproducible.
+      The test set prediction table and quantiles were generated successfully, which means
+      the model pipeline ran correctly end-to-end.
     </p>
 
     <h2>5. Interpretation</h2>
     <p>
-      In this sample setting, higher usage intensity and higher price sensitivity
-      are associated with shorter predicted survival time under the fitted AFT
-      model. These are model-based associations and should not be interpreted as
-      strict causality.
+      In this run, both feature coefficients are negative. Under this AFT setting, larger
+      values of these features are associated with shorter predicted survival time.
+      This is an association pattern from the fitted model, not strict causality.
     </p>
 
-    <h2>6. Limitations</h2>
+    <h2>6. Practical Notes</h2>
     <p>
-      The current sample size is small and mainly for reproducibility. For a
-      production-grade analysis, larger real datasets and additional model
-      comparisons (e.g., Kaplan-Meier, Cox) are recommended.
+      I encountered optimization warnings (e.g., line-search step adjustment), but the training
+      still converged and produced stable outputs. So I kept the results and verified them in
+      the notebook instead of discarding the run.
+    </p>
+
+    <h2>7. Limitations and Next Steps</h2>
+    <p>
+      The current sample is small and mainly for reproducibility. In future work, I would
+      test larger real data and compare additional methods such as Kaplan-Meier and Cox models.
     </p>
 
     <a class="back" href="./index.html">← Back to homepage</a>
